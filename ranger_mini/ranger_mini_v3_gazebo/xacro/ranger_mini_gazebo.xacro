@@ -106,11 +106,21 @@
                 <geometry>
                     <cylinder length="0.08" radius="0.09" />
                 </geometry>
-                     <contact>
-                         <ode>
-                        <min_depth>0.001</min_depth>
-                         </ode>
-                    </contact>
+                <surface>
+                  <friction>
+                    <ode>
+                      <mu>5.0</mu>
+                      <mu2>5.0</mu2>
+                    </ode>
+                  </friction>
+                  <contact>
+                    <ode>
+                      <slip1>0.001</slip1>
+                      <slip2>0.001</slip2>
+                      <min_depth>0.001</min_depth>
+                    </ode>
+                  </contact>
+                </surface>
             </collision>
         </link>
 
@@ -195,11 +205,21 @@
                 <geometry>
                     <cylinder length="0.08" radius="0.09" />
                 </geometry>
-                     <contact>
-                         <ode>
-                        <min_depth>0.001</min_depth>
-                         </ode>
-                    </contact>
+                <surface>
+                  <friction>
+                    <ode>
+                      <mu>5.0</mu>
+                      <mu2>5.0</mu2>
+                    </ode>
+                  </friction>
+                  <contact>
+                    <ode>
+                      <slip1>0.001</slip1>
+                      <slip2>0.001</slip2>
+                      <min_depth>0.001</min_depth>
+                    </ode>
+                  </contact>
+                </surface>
             </collision>
         </link>
 
@@ -283,11 +303,21 @@
                 <geometry>
                     <cylinder length="0.08" radius="0.09" />
                 </geometry>
-                     <contact>
-                         <ode>
-                        <min_depth>0.001</min_depth>
-                         </ode>
-                    </contact>
+                <surface>
+                  <friction>
+                    <ode>
+                      <mu>5.0</mu>
+                      <mu2>5.0</mu2>
+                    </ode>
+                  </friction>
+                  <contact>
+                    <ode>
+                      <slip1>0.001</slip1>
+                      <slip2>0.001</slip2>
+                      <min_depth>0.001</min_depth>
+                    </ode>
+                  </contact>
+                </surface>
             </collision>
         </link>
 
@@ -343,11 +373,21 @@
                 <geometry>
                     <cylinder length="0.08" radius="0.09" />
                 </geometry>
-                     <contact>
-                         <ode>
-                        <min_depth>0.001</min_depth>
-                         </ode>
-                    </contact>
+                <surface>
+                  <friction>
+                    <ode>
+                      <mu>5.0</mu>
+                      <mu2>5.0</mu2>
+                    </ode>
+                  </friction>
+                  <contact>
+                    <ode>
+                      <slip1>0.001</slip1>
+                      <slip2>0.001</slip2>
+                      <min_depth>0.001</min_depth>
+                    </ode>
+                  </contact>
+                </surface>
             </collision>
         </link>
 
