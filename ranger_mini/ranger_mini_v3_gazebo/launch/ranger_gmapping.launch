@@ -1,0 +1,55 @@
+<launch>
+    <!-- 1. 启动仿真环境和底盘控制 -->
+    <include file="$(find ranger_mini_v3_gazebo)/launch/ranger_mini_v3_test_environment.launch" />
+
+    <!-- 2. 启动 Gmapping 节点 -->
+    <node pkg="gmapping" type="slam_gmapping" name="slam_gmapping" output="screen">
+        <!-- 坐标系设置 (必须与车体 tf 树完全一致) -->
+        <param name="base_frame" value="base_footprint"/>
+        <param name="odom_frame" value="odom"/>
+        <param name="map_frame" value="map"/>
+
+        <!-- 激光话题 -->
+        <remap from="scan" to="/scan"/>
+
+        <!-- Gmapping 核心参数 -->
+        <param name="map_update_interval" value="2.0"/>
+        <!-- 地图更新频率 -->
+        <param name="maxUrange" value="24.0"/>
+        <param name="maxRange" value="25.0"/>
+        <!-- 激光雷达最大有效使用距离 -->
+        <param name="sigma" value="0.05"/>
+        <param name="kernelSize" value="1"/>
+        <param name="lstep" value="0.05"/>
+        <param name="astep" value="0.05"/>
+        <param name="iterations" value="5"/>
+        <param name="lsigma" value="0.075"/>
+        <param name="ogain" value="3.0"/>
+        <param name="lskip" value="0"/>
+        <param name="srr" value="0.1"/>
+        <param name="srt" value="0.2"/>
+        <param name="str" value="0.1"/>
+        <param name="stt" value="0.2"/>
+
+        <!-- 运动更新阈值 (多远或转多大角度更新一次粒子) -->
+        <param name="linearUpdate" value="0.5"/>
+        <param name="angularUpdate" value="0.2"/>
+        <param name="temporalUpdate" value="-1.0"/>
+        <param name="resampleThreshold" value="0.5"/>
+
+        <!-- 粒子数量 (如果算力够可以调高提升精度) -->
+        <param name="particles" value="50"/>
+
+        <!-- 初始地图大小 -->
+        <param name="xmin" value="-20.0"/>
+        <param name="ymin" value="-20.0"/>
+        <param name="xmax" value="20.0"/>
+        <param name="ymax" value="20.0"/>
+        <param name="delta" value="0.05"/>
+        <!-- 地图分辨率 5cm -->
+        <param name="llsamplerange" value="0.01"/>
+        <param name="llsamplestep" value="0.01"/>
+        <param name="lasamplerange" value="0.005"/>
+        <param name="lasamplestep" value="0.005"/>
+    </node>
+</launch>

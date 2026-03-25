@@ -1,0 +1,30 @@
+<launch>
+    <!-- 1. 必须要指定地图文件 -->
+    <arg name="map_file" default="$(find ranger_mini_v3_gazebo)/maps/my_map.yaml"/>
+
+    <!-- 2. 启动仿真环境和机器人模型 (Gazebo) -->
+    <include file="$(find ranger_mini_v3_gazebo)/launch/ranger_mini_v3_test_environment.launch" />
+
+    <!-- 3. 运行地图服务器 -->
+    <node name="map_server" pkg="map_server" type="map_server" args="$(arg map_file)" />
+
+    <!-- 4. AMCL 定位算法 (保留，因为我们需要它提供 map -> odom 的坐标变换) -->
+    <node pkg="amcl" type="amcl" name="amcl" output="screen">
+        <param name="use_map_topic" value="false"/>
+        <param name="odom_model_type" value="diff"/>
+        <param name="odom_frame_id" value="odom"/>
+        <param name="base_frame_id" value="base_footprint"/>
+        <param name="global_frame_id" value="map"/>
+        <param name="transform_tolerance" value="1.0"/>
+        <remap from="scan" to="/scan"/>
+        <param name="initial_pose_x" value="0.0"/>
+        <param name="initial_pose_y" value="0.0"/>
+        <param name="initial_pose_a" value="0.0"/>
+    </node>
+
+    <!-- 5. 启动我们自定义的 Python 规划器 (替代原来的 move_base) -->
+    <node pkg="ranger_mini_v3_gazebo" type="custom_planner.py" name="custom_planner" output="screen">
+        <!-- 这里不需要 remap，因为脚本里已经写死发给 /four_wheel_steering_controller/cmd_vel -->
+    </node>
+
+</launch>

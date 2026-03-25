@@ -1,0 +1,4 @@
+<launch>
+    <!-- 启动 RViz 并加载指定的配置文件 -->
+    <node name="rviz" pkg="rviz" type="rviz" output="screen" args="-d $(find ranger_mini_v3)/rviz/ranger.rviz" />
+</launch>

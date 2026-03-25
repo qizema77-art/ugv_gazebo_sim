@@ -1,0 +1,40 @@
+<launch>
+    <!-- 必须要指定地图文件来跑导航 -->
+    <arg name="map_file" default="$(find ranger_mini_v3_gazebo)/maps/my_map.yaml"/>
+
+    <!-- 1. 启动仿真环境和机器人模型 -->
+    <include file="$(find ranger_mini_v3_gazebo)/launch/ranger_mini_v3_test_environment.launch" />
+
+    <!-- 2. 运行地图服务器 -->
+    <node name="map_server" pkg="map_server" type="map_server" args="$(arg map_file)" />
+
+    <!-- 3. AMCL 定位算法 -->
+    <node pkg="amcl" type="amcl" name="amcl" output="screen">
+        <param name="use_map_topic" value="false"/>
+        <param name="odom_model_type" value="diff"/>
+        <param name="odom_frame_id" value="odom"/>
+        <param name="base_frame_id" value="base_footprint"/>
+        <param name="global_frame_id" value="map"/>
+
+        <!-- 增加 amcl 发送 map->odom TF 的频率和容忍度 -->
+        <param name="transform_tolerance" value="1.0"/>
+        <param name="gui_publish_rate" value="10.0"/>
+        <remap from="scan" to="/scan"/>
+        <!-- 调整起始位姿，可以通过 RViz 的 2D Pose Estimate 重新设定 -->
+        <param name="initial_pose_x" value="0.0"/>
+        <param name="initial_pose_y" value="0.0"/>
+        <param name="initial_pose_a" value="0.0"/>
+    </node>
+
+    <!-- 4. 运行 move_base 导航规划器 -->
+    <node pkg="move_base" type="move_base" respawn="false" name="move_base" output="screen">
+        <rosparam file="$(find ranger_mini_v3_gazebo)/config/nav/costmap_common_params.yaml" command="load" ns="global_costmap" />
+        <rosparam file="$(find ranger_mini_v3_gazebo)/config/nav/costmap_common_params.yaml" command="load" ns="local_costmap" />
+        <rosparam file="$(find ranger_mini_v3_gazebo)/config/nav/local_costmap_params.yaml" command="load" />
+        <rosparam file="$(find ranger_mini_v3_gazebo)/config/nav/global_costmap_params.yaml" command="load" />
+        <rosparam file="$(find ranger_mini_v3_gazebo)/config/nav/base_local_planner_params.yaml" command="load" />
+
+        <!-- 接入控制器以发速度指令 -->
+        <remap from="cmd_vel" to="/four_wheel_steering_controller/cmd_vel"/>
+    </node>
+</launch>

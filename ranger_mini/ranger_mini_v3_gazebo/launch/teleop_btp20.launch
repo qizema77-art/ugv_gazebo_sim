@@ -1,0 +1,14 @@
+<launch>
+    <!-- 启动 joy 节点，读取手柄数据 -->
+    <node pkg="joy" type="joy_node" name="joy_node" output="screen">
+        <param name="dev" value="/dev/input/js0" />
+        <param name="deadzone" value="0.05" />
+        <param name="autorepeat_rate" value="20" />
+        <!-- 每秒强制发送20次信号，防止超时断开 -->
+    </node>
+    <!-- 启动 teleop_twist_joy，加载北通鲲鹏20手柄配置 -->
+    <node pkg="teleop_twist_joy" type="teleop_node" name="teleop_twist_joy" output="screen">
+        <rosparam file="$(find ranger_mini_v3_gazebo)/config/teleop_btp20.yaml" command="load" />
+        <remap from="cmd_vel" to="/four_wheel_steering_controller/cmd_vel"/>
+    </node>
+</launch>
