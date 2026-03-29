@@ -1,7 +1,7 @@
 <launch>
     <!-- 必须要指定地图文件来跑导航 -->
     <arg name="map_file" default="$(find ranger_mini_v3_gazebo)/maps/my_map.yaml"/>
-
+    
     <!-- 1. 启动仿真环境和机器人模型 -->
     <include file="$(find ranger_mini_v3_gazebo)/launch/ranger_mini_v3_test_environment.launch" />
 
@@ -20,7 +20,10 @@
         <param name="transform_tolerance" value="1.0"/>
         <param name="gui_publish_rate" value="10.0"/>
         <remap from="scan" to="/scan"/>
-        <!-- 调整起始位姿，可以通过 RViz 的 2D Pose Estimate 重新设定 -->
+        
+        <!-- 重映射 odom 话题到阿克曼控制器发布的真正里程计 -->
+        <remap from="odom" to="/four_wheel_steering_controller/odom"/>
+        
         <param name="initial_pose_x" value="0.0"/>
         <param name="initial_pose_y" value="0.0"/>
         <param name="initial_pose_a" value="0.0"/>
@@ -32,9 +35,23 @@
         <rosparam file="$(find ranger_mini_v3_gazebo)/config/nav/costmap_common_params.yaml" command="load" ns="local_costmap" />
         <rosparam file="$(find ranger_mini_v3_gazebo)/config/nav/local_costmap_params.yaml" command="load" />
         <rosparam file="$(find ranger_mini_v3_gazebo)/config/nav/global_costmap_params.yaml" command="load" />
-        <rosparam file="$(find ranger_mini_v3_gazebo)/config/nav/base_local_planner_params.yaml" command="load" />
 
-        <!-- 接入控制器以发速度指令 -->
+        <!-- 导入我们新建的全局规划器参数，强制使用A* -->
+        <param name="base_global_planner" value="global_planner/GlobalPlanner" />
+        <rosparam file="$(find ranger_mini_v3_gazebo)/config/nav/base_global_planner_params.yaml" command="load" />
+
+        <!-- 使用 TEB Local Planner 代替默认的 Trajectory Planner -->
+        <rosparam file="$(find ranger_mini_v3_gazebo)/config/nav/teb_local_planner_params.yaml" command="load" />
+        <param name="base_local_planner" value="teb_local_planner/TebLocalPlannerROS" />
+
+        <param name="controller_frequency" value="10.0" />
+        <param name="clearing_rotation_allowed" value="false" />
+        <param name="recovery_behavior_enabled" value="false" />
+
+        <!-- 把 Odom 数据映射对 -->
+        <remap from="odom" to="/four_wheel_steering_controller/odom"/>
+        
+        <!-- 输出直接对接底层阿克曼控制器，不再需要绕路 -->
         <remap from="cmd_vel" to="/four_wheel_steering_controller/cmd_vel"/>
     </node>
 </launch>

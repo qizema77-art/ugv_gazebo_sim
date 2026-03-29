@@ -1,0 +1,70 @@
+TebLocalPlannerROS:
+
+ odom_topic: /four_wheel_steering_controller/odom
+ map_frame: map
+    
+ # Trajectory
+ teb_autosize: True
+ global_plan_viapoint_sep: 0.5
+ dt_ref: 0.3
+ dt_hysteresis: 0.1
+ global_plan_overwrite_orientation: True
+ allow_init_with_backwards_motion: False
+ max_global_plan_lookahead_dist: 3.0
+ feasibility_check_no_poses: 2
+    
+ # Robot
+ max_vel_x: 0.6
+ max_vel_x_backwards: 0.2
+ max_vel_y: 0.0                  # 必须为0，阿克曼底盘无法横移
+ max_vel_theta: 0.9               
+ acc_lim_x: 0.5
+ acc_lim_theta: 0.5
+
+ # ********************** 阿克曼运动学 (Ackermann) **************************
+ min_turning_radius: 0.70       # 最小转弯半径，禁止原地旋转
+ wheelbase: 0.49                # 轴距，可根据实际底盘调整
+ cmd_angle_instead_rotvel: False # 因为底层控制器接收的是 Twist (v, w) 计算转角
+ # **************************************************************
+
+ footprint_model:
+   type: "circular"
+   radius: 0.28
+
+ # GoalTolerance
+ xy_goal_tolerance: 0.3
+ yaw_goal_tolerance: 0.6
+ free_goal_vel: False
+    
+ # Obstacles
+ min_obstacle_dist: 0.3
+ include_costmap_obstacles: True
+ costmap_obstacles_behind_robot_dist: 1.0
+ obstacle_poses_affected: 30
+ costmap_converter_plugin: ""
+ costmap_converter_spin_thread: True
+ costmap_converter_rate: 5
+
+ # Optimization 
+ no_inner_iterations: 5
+ no_outer_iterations: 4
+ optimization_activate: True
+ optimization_verbose: False
+ penalty_epsilon: 0.1
+ weight_max_vel_x: 2
+ weight_max_vel_y: 0
+ weight_max_vel_theta: 1
+ weight_acc_lim_x: 1
+ weight_acc_lim_theta: 1
+ weight_kinematics_nh: 1000      # 极高权重：强迫像汽车一样满足非完整约束
+ weight_kinematics_forward_drive: 1000 # 极高权重：强迫尽量向前开，禁止随意倒车
+ weight_kinematics_turning_radius: 1   # 注意如果这里太高可能会导致无解
+ weight_optimaltime: 1
+ weight_viapoint: 15.0
+ weight_obstacle: 50
+ weight_dynamic_obstacle: 10 
+
+ # Homotopy Class Planner
+ enable_homotopy_class_planning: True
+ max_number_classes: 3
+ selection_cost_hysteresis: 1.0

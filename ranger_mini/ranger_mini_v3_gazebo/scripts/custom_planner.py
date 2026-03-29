@@ -5,7 +5,7 @@ import rospy
 import math
 import numpy as np
 import tf
-from geometry_msgs.msg import Twist, PoseStamped
+from geometry_msgs.msg import Twist, PoseStamped, PoseWithCovarianceStamped
 from nav_msgs.msg import Odometry, OccupancyGrid, Path
 from sensor_msgs.msg import LaserScan
 from tf.transformations import euler_from_quaternion
@@ -20,7 +20,7 @@ class CustomAckermannPlanner:
         self.cmd_pub = rospy.Publisher("/four_wheel_steering_controller/cmd_vel", Twist, queue_size=1)
         
         rospy.Subscriber("/move_base_simple/goal", PoseStamped, self.goal_cb)
-        rospy.Subscriber("/odom", Odometry, self.odom_cb)
+        rospy.Subscriber("/amcl_pose", PoseWithCovarianceStamped, self.amcl_cb)
         rospy.Subscriber("/scan", LaserScan, self.scan_cb)
 
         # 状态变量
@@ -43,12 +43,17 @@ class CustomAckermannPlanner:
 
         rospy.loginfo("[自定义规划器] 初始化完成！等待RViz中下发 '2D Nav Goal'...")
 
-    def odom_cb(self, msg):
+    def amcl_cb(self, msg):
+        """使用 AMCL 提供的 map 坐标系下的位姿，解决里程计漂移导致的穿墙问题"""
         self.current_x = msg.pose.pose.position.x
         self.current_y = msg.pose.pose.position.y
         orientation_q = msg.pose.pose.orientation
         _, _, self.current_yaw = euler_from_quaternion([
             orientation_q.x, orientation_q.y, orientation_q.z, orientation_q.w])
+
+    def odom_cb(self, msg):
+        # 暂时弃用 odom，改用 amcl_pose 保证在地图中的准确性
+        pass
 
     def scan_cb(self, msg):
         """局部避障: 检测正前方障碍物距离"""

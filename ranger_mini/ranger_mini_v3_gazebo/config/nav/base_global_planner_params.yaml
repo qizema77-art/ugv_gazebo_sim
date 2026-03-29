@@ -1,0 +1,14 @@
+GlobalPlanner:
+  allow_unknown: true          # 允许在未知空间规划
+  default_tolerance: 0.2       # 目标点宽容度
+  visualize_potential: true    # 可视化势场，方便在Rviz开GlobalPlanner观察
+  use_dijkstra: false          # false即使用A*，true即使用Dijkstra
+  use_quadratic: true          # 使用二次近似，路径更平滑
+  use_grid_path: true          # 修复“从势场获取路径失败”的Bug，强制使用网格追踪路径
+  old_navfn_behavior: false    # 禁用旧的Dijkstra导航行为
+  
+  # ------ 降低A*对障碍物的敏感度，防止它觉得无路可走 ------
+  lethal_cost: 253             
+  neutral_cost: 66             
+  cost_factor: 0.55            # 调低代价因子，让A*胆子大一点，敢于穿走廊
+  publish_potential: true
