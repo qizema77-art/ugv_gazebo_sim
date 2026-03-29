@@ -1,11 +1,11 @@
 local_costmap:
-  global_frame: odom
+  global_frame: odom          # 注意这里，虽然是odom，但如果打滑，它和map是相对飘的
   robot_base_frame: base_footprint
-  update_frequency: 5.0
-  publish_frequency: 2.0
-  transform_tolerance: 1.0
+  update_frequency: 10.0
+  publish_frequency: 10.0
+  transform_tolerance: 2.0    # 忍受由于计算卡顿导致的时间戳延迟
   static_map: false
   rolling_window: true
-  width: 4.0
-  height: 4.0
+  width: 5.0
+  height: 5.0
   resolution: 0.05

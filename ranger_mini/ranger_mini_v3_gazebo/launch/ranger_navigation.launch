@@ -1,7 +1,7 @@
 <launch>
     <!-- 必须要指定地图文件来跑导航 -->
     <arg name="map_file" default="$(find ranger_mini_v3_gazebo)/maps/my_map.yaml"/>
-    
+
     <!-- 1. 启动仿真环境和机器人模型 -->
     <include file="$(find ranger_mini_v3_gazebo)/launch/ranger_mini_v3_test_environment.launch" />
 
@@ -20,13 +20,33 @@
         <param name="transform_tolerance" value="1.0"/>
         <param name="gui_publish_rate" value="10.0"/>
         <remap from="scan" to="/scan"/>
-        
+
         <!-- 重映射 odom 话题到阿克曼控制器发布的真正里程计 -->
         <remap from="odom" to="/four_wheel_steering_controller/odom"/>
-        
+
         <param name="initial_pose_x" value="0.0"/>
         <param name="initial_pose_y" value="0.0"/>
         <param name="initial_pose_a" value="0.0"/>
+
+        <!-- 针对车轮打滑和长走廊导致定位飘的问题做的优化 -->
+        <param name="update_min_d" value="0.2"/>
+        <param name="update_min_a" value="0.5"/>
+        <param name="min_particles" value="500"/>
+        <param name="max_particles" value="3000"/>
+        <param name="laser_max_beams" value="60"/>
+        <param name="odom_alpha1" value="1.5"/>
+        <param name="odom_alpha2" value="0.2"/>
+        <param name="odom_alpha3" value="0.2"/>
+        <param name="odom_alpha4" value="1.0"/>
+        <!-- Laser alignment optimizations -->
+        <param name="laser_model_type" value="likelihood_field"/>
+        <param name="laser_z_hit" value="0.95"/>
+        <param name="laser_z_short" value="0.1"/>
+        <param name="laser_z_max" value="0.05"/>
+        <param name="laser_z_rand" value="0.05"/>
+        <param name="laser_sigma_hit" value="0.2"/>
+        <param name="laser_lambda_short" value="0.1"/>
+        <param name="laser_likelihood_max_dist" value="2.0"/>
     </node>
 
     <!-- 4. 运行 move_base 导航规划器 -->
@@ -50,7 +70,7 @@
 
         <!-- 把 Odom 数据映射对 -->
         <remap from="odom" to="/four_wheel_steering_controller/odom"/>
-        
+
         <!-- 输出直接对接底层阿克曼控制器，不再需要绕路 -->
         <remap from="cmd_vel" to="/four_wheel_steering_controller/cmd_vel"/>
     </node>
