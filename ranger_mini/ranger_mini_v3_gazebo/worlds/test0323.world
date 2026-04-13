@@ -2221,6 +2221,17 @@
         <scale>1.0</scale>
         <interpolate_x>true</interpolate_x>
       </animation>
+      <link name="actor_link">
+        <pose>0 0 1.0 0 0 0</pose>
+        <collision name="Box_Collision">
+          <geometry>
+            <cylinder>
+              <radius>0.3</radius>
+              <length>1.8</length>
+            </cylinder>
+          </geometry>
+        </collision>
+      </link>
       <script>
         <loop>true</loop>
         <delay_start>0.0</delay_start>
@@ -2248,6 +2259,13 @@
           </waypoint>
         </trajectory>
       </script>
+      <plugin name="actor_collisions_plugin" filename="libActorCollisionsPlugin.so">
+        <scaling collision="Box_Collision">
+          <x>1.0</x>
+          <y>1.0</y>
+          <z>1.0</z>
+        </scaling>
+      </plugin>
     </actor>
   </world>
 </sdf>
