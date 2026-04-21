@@ -1,8 +1,8 @@
 obstacle_range: 4.0
 raytrace_range: 5.0
 footprint: [[-0.25, -0.18], [-0.25, 0.18], [0.25, 0.18], [0.25, -0.18]]
-inflation_radius: 0.15 # 降低膨胀半径，防止A*认为走廊全是被堵死的
-cost_scaling_factor: 10.0 # 提高代价下降率，离障碍物稍微远一点代价值就骤降
+inflation_radius: 1.2 # 增加膨胀半径，给全局规划留充足安全距离
+cost_scaling_factor: 5.0 
 map_type: costmap
 observation_sources: scan
 scan: {sensor_frame: laser_link, data_type: LaserScan, topic: /scan, marking: true, clearing: true}

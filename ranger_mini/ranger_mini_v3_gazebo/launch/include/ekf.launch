@@ -1,0 +1,6 @@
+<launch>
+    <node pkg="robot_localization" type="ekf_localization_node" name="ekf_localization" output="screen" clear_params="true">
+        <rosparam command="load" file="$(find ranger_mini_v3_gazebo)/config/ekf_params.yaml" />
+        <remap from="odometry/filtered" to="/odometry/filtered" />
+    </node>
+</launch>

@@ -2,7 +2,10 @@
     <!-- 1. 启动仿真环境和底盘控制 -->
     <include file="$(find ranger_mini_v3_gazebo)/launch/ranger_mini_v3_test_environment.launch" />
 
-    <!-- 2. 启动 Gmapping 节点 -->
+    <!-- 2. 融合里程计 + IMU，发布稳定的 odom->base_footprint -->
+    <include file="$(find ranger_mini_v3_gazebo)/launch/include/ekf.launch" />
+
+    <!-- 3. 启动 Gmapping 节点 -->
     <node pkg="gmapping" type="slam_gmapping" name="slam_gmapping" output="screen">
         <!-- 坐标系设置 (必须与车体 tf 树完全一致) -->
         <param name="base_frame" value="base_footprint"/>
@@ -26,19 +29,19 @@
         <param name="lsigma" value="0.075"/>
         <param name="ogain" value="3.0"/>
         <param name="lskip" value="0"/>
-        <param name="srr" value="0.1"/>
-        <param name="srt" value="0.2"/>
-        <param name="str" value="0.1"/>
-        <param name="stt" value="0.2"/>
+        <param name="srr" value="0.10"/>
+        <param name="srt" value="0.20"/>
+        <param name="str" value="0.10"/>
+        <param name="stt" value="0.20"/>
 
         <!-- 运动更新阈值 (多远或转多大角度更新一次粒子) -->
-        <param name="linearUpdate" value="0.5"/>
-        <param name="angularUpdate" value="0.2"/>
+        <param name="linearUpdate" value="0.2"/>
+        <param name="angularUpdate" value="0.1"/>
         <param name="temporalUpdate" value="-1.0"/>
         <param name="resampleThreshold" value="0.5"/>
 
         <!-- 粒子数量 (如果算力够可以调高提升精度) -->
-        <param name="particles" value="50"/>
+        <param name="particles" value="80"/>
 
         <!-- 初始地图大小 -->
         <param name="xmin" value="-20.0"/>

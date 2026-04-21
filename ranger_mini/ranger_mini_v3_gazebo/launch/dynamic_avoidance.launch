@@ -1,6 +1,6 @@
 <launch>
     <!-- 必须要指定地图文件来跑导航 -->
-    <arg name="map_file" default="$(find ranger_mini_v3_gazebo)/maps/map_with_imu.yaml"/>
+    <arg name="map_file" default="$(find ranger_mini_v3_gazebo)/maps/single_corridor.yaml"/>
 
     <!-- 1. 启动仿真环境和机器人模型 -->
     <include file="$(find ranger_mini_v3_gazebo)/launch/ranger_mini_v3_test_environment.launch" />

@@ -7,6 +7,7 @@ Panels:
         - /Global Options1
         - /Status1
         - /DepthCloud1/Auto Size1
+        - /LaserScan1
         - /Image1
       Splitter Ratio: 0.5
     Tree Height: 244
@@ -221,7 +222,7 @@ Visualization Manager:
       Queue Size: 10
       Selectable: true
       Size (Pixels): 3
-      Size (m): 0.009999999776482582
+      Size (m): 0.10000000149011612
       Style: Flat Squares
       Topic: /scan
       Unreliable: false
@@ -343,7 +344,7 @@ Visualization Manager:
   Views:
     Current:
       Class: rviz/Orbit
-      Distance: 12.58466625213623
+      Distance: 13.147649765014648
       Enable Stereo Rendering:
         Stereo Eye Separation: 0.05999999865889549
         Stereo Focal Distance: 1
@@ -383,5 +384,5 @@ Window Geometry:
   Views:
     collapsed: true
   Width: 1080
-  X: 2560
-  Y: 659
+  X: 1321
+  Y: 169

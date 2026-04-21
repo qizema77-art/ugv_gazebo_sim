@@ -5,6 +5,9 @@
     <!-- 2. 启动仿真环境和机器人模型 (Gazebo) -->
     <include file="$(find ranger_mini_v3_gazebo)/launch/ranger_mini_v3_test_environment.launch" />
 
+    <!-- 2.1 启动 EKF，提供 odom->base_footprint -->
+    <include file="$(find ranger_mini_v3_gazebo)/launch/include/ekf.launch" />
+
     <!-- 3. 运行地图服务器 -->
     <node name="map_server" pkg="map_server" type="map_server" args="$(arg map_file)" />
 
@@ -15,8 +18,34 @@
         <param name="odom_frame_id" value="odom"/>
         <param name="base_frame_id" value="base_footprint"/>
         <param name="global_frame_id" value="map"/>
-        <param name="transform_tolerance" value="1.0"/>
+        <param name="transform_tolerance" value="0.2"/>
+        <param name="gui_publish_rate" value="20.0"/>
         <remap from="scan" to="/scan"/>
+        <remap from="odom" to="/odometry/filtered"/>
+        <param name="update_min_d" value="0.02"/>
+        <param name="update_min_a" value="0.10"/>
+        <param name="min_particles" value="300"/>
+        <param name="max_particles" value="1200"/>
+        <param name="laser_max_beams" value="120"/>
+        <param name="resample_interval" value="1"/>
+        <param name="recovery_alpha_slow" value="0.001"/>
+        <param name="recovery_alpha_fast" value="0.1"/>
+        <param name="odom_alpha1" value="0.4"/>
+        <param name="odom_alpha2" value="0.2"/>
+        <param name="odom_alpha3" value="2.0"/>
+        <param name="odom_alpha4" value="0.2"/>
+        <param name="laser_model_type" value="likelihood_field_prob"/>
+        <param name="laser_z_hit" value="0.95"/>
+        <param name="laser_z_short" value="0.1"/>
+        <param name="laser_z_max" value="0.05"/>
+        <param name="laser_z_rand" value="0.05"/>
+        <param name="laser_sigma_hit" value="0.2"/>
+        <param name="laser_lambda_short" value="0.1"/>
+        <param name="laser_likelihood_max_dist" value="2.0"/>
+        <param name="do_beamskip" value="true"/>
+        <param name="beam_skip_distance" value="0.5"/>
+        <param name="beam_skip_threshold" value="0.3"/>
+        <param name="beam_skip_error_threshold" value="0.9"/>
         <param name="initial_pose_x" value="0.0"/>
         <param name="initial_pose_y" value="0.0"/>
         <param name="initial_pose_a" value="0.0"/>

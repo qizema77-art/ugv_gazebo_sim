@@ -5,8 +5,8 @@
 
 axis_linear: 1      # 左摇杆上下
 axis_angular: 0     # 左摇杆左右
-scale_linear: 0.8   # 最大线速度
-scale_angular: -0.2  # 最大角速度（修正为正右负左）
+scale_linear: 2.0   # 最大线速度
+scale_angular: 1.0  # 最大角速度（修正为正右负左）
 
 # 按钮映射（可选，按住A键才允许动）
 enable_button: 0    # A键（一般为0）

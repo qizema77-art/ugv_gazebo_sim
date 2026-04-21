@@ -1,0 +1,1393 @@
+<sdf version='1.7'>
+  <world name='default'>
+    <light name='sun' type='directional'>
+      <cast_shadows>1</cast_shadows>
+      <pose>0 0 10 0 -0 0</pose>
+      <diffuse>0.8 0.8 0.8 1</diffuse>
+      <specular>0.2 0.2 0.2 1</specular>
+      <attenuation>
+        <range>1000</range>
+        <constant>0.9</constant>
+        <linear>0.01</linear>
+        <quadratic>0.001</quadratic>
+      </attenuation>
+      <direction>-0.5 0.1 -0.9</direction>
+      <spot>
+        <inner_angle>0</inner_angle>
+        <outer_angle>0</outer_angle>
+        <falloff>0</falloff>
+      </spot>
+    </light>
+    <model name='ground_plane'>
+      <static>1</static>
+      <link name='link'>
+        <collision name='collision'>
+          <geometry>
+            <plane>
+              <normal>0 0 1</normal>
+              <size>100 100</size>
+            </plane>
+          </geometry>
+          <surface>
+            <friction>
+              <ode>
+                <mu>100</mu>
+                <mu2>50</mu2>
+              </ode>
+              <torsional>
+                <ode/>
+              </torsional>
+            </friction>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+          </surface>
+          <max_contacts>10</max_contacts>
+        </collision>
+        <visual name='visual'>
+          <cast_shadows>0</cast_shadows>
+          <geometry>
+            <plane>
+              <normal>0 0 1</normal>
+              <size>100 100</size>
+            </plane>
+          </geometry>
+          <material>
+            <script>
+              <uri>file://media/materials/scripts/gazebo.material</uri>
+              <name>Gazebo/Grey</name>
+            </script>
+          </material>
+        </visual>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+    </model>
+    <gravity>0 0 -9.8</gravity>
+    <magnetic_field>6e-06 2.3e-05 -4.2e-05</magnetic_field>
+    <atmosphere type='adiabatic'/>
+    <physics type='ode'>
+      <max_step_size>0.001</max_step_size>
+      <real_time_factor>1</real_time_factor>
+      <real_time_update_rate>1000</real_time_update_rate>
+    </physics>
+    <scene>
+      <ambient>0.4 0.4 0.4 1</ambient>
+      <background>0.7 0.7 0.7 1</background>
+      <shadows>1</shadows>
+    </scene>
+    <wind/>
+    <spherical_coordinates>
+      <surface_model>EARTH_WGS84</surface_model>
+      <latitude_deg>0</latitude_deg>
+      <longitude_deg>0</longitude_deg>
+      <elevation>0</elevation>
+      <heading_deg>0</heading_deg>
+    </spherical_coordinates>
+    <model name='ranger_mini_v3'>
+      <link name='base_footprint'>
+        <inertial>
+          <pose>-0.026096 -0.0029 0.358782 0 -0 0</pose>
+          <mass>10.45</mass>
+          <inertia>
+            <ixx>0.172059</ixx>
+            <ixy>5.53334e-05</ixy>
+            <ixz>-0.000120357</ixz>
+            <iyy>0.286129</iyy>
+            <iyz>-0.000131986</iyz>
+            <izz>0.347378</izz>
+          </inertia>
+        </inertial>
+        <collision name='base_footprint_fixed_joint_lump__base_link_collision'>
+          <pose>0 0 0.3 0 -0 0</pose>
+          <geometry>
+            <box>
+              <size>0.72 0.5 0.14</size>
+            </box>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <collision name='base_footprint_fixed_joint_lump__camera_link_collision_1'>
+          <pose>-0.3 0 0.39 0 -0 3.14159</pose>
+          <geometry>
+            <box>
+              <size>0.03 0.04 0.04</size>
+            </box>
+          </geometry>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <friction>
+              <ode/>
+              <torsional>
+                <ode/>
+              </torsional>
+            </friction>
+            <bounce/>
+          </surface>
+          <max_contacts>10</max_contacts>
+        </collision>
+        <collision name='base_footprint_fixed_joint_lump__imu_link_collision_2'>
+          <pose>0 0 0.42 0 -0 0</pose>
+          <geometry>
+            <box>
+              <size>0.03 0.02 0.01</size>
+            </box>
+          </geometry>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <friction>
+              <ode/>
+              <torsional>
+                <ode/>
+              </torsional>
+            </friction>
+            <bounce/>
+          </surface>
+          <max_contacts>10</max_contacts>
+        </collision>
+        <collision name='base_footprint_fixed_joint_lump__kinect_link_collision_3'>
+          <pose>0.3 0 0.41 0 -0 0</pose>
+          <geometry>
+            <box>
+              <size>0.07 0.3 0.09</size>
+            </box>
+          </geometry>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <friction>
+              <ode/>
+              <torsional>
+                <ode/>
+              </torsional>
+            </friction>
+            <bounce/>
+          </surface>
+          <max_contacts>10</max_contacts>
+        </collision>
+        <collision name='base_footprint_fixed_joint_lump__laser_stand_link_collision_4'>
+          <pose>0 0 0.43 0 -0 0</pose>
+          <geometry>
+            <cylinder>
+              <length>0.12</length>
+              <radius>0.03</radius>
+            </cylinder>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <collision name='base_footprint_fixed_joint_lump__laser_link_collision_5'>
+          <pose>0 0 0.51 0 -0 0</pose>
+          <geometry>
+            <cylinder>
+              <length>0.05</length>
+              <radius>0.05</radius>
+            </cylinder>
+          </geometry>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <friction>
+              <ode/>
+              <torsional>
+                <ode/>
+              </torsional>
+            </friction>
+            <bounce/>
+          </surface>
+          <max_contacts>10</max_contacts>
+        </collision>
+        <visual name='base_footprint_visual'>
+          <pose>0 0 0 0 -0 0</pose>
+          <geometry>
+            <box>
+              <size>0.001 0.001 0.001</size>
+            </box>
+          </geometry>
+        </visual>
+        <visual name='base_footprint_fixed_joint_lump__base_link_visual_1'>
+          <pose>0 0 0.37 0 -0 0</pose>
+          <geometry>
+            <mesh>
+              <scale>1000 1000 1000</scale>
+              <uri>/home/m7/ranger_ws/src/ugv_gazebo_sim/ranger_mini/ranger_mini_v3/meshes/ranger_base.dae</uri>
+            </mesh>
+          </geometry>
+        </visual>
+        <visual name='base_footprint_fixed_joint_lump__camera_link_visual_2'>
+          <pose>-0.3 0 0.39 0 -0 3.14159</pose>
+          <geometry>
+            <box>
+              <size>0.03 0.04 0.04</size>
+            </box>
+          </geometry>
+          <material>
+            <script>
+              <name>Gazebo/White</name>
+              <uri>file://media/materials/scripts/gazebo.material</uri>
+            </script>
+          </material>
+        </visual>
+        <visual name='base_footprint_fixed_joint_lump__imu_link_visual_3'>
+          <pose>0 0 0.42 0 -0 0</pose>
+          <geometry>
+            <box>
+              <size>0.03 0.02 0.01</size>
+            </box>
+          </geometry>
+        </visual>
+        <visual name='base_footprint_fixed_joint_lump__kinect_link_visual_4'>
+          <pose>0.3 0 0.41 0 -0 0</pose>
+          <geometry>
+            <box>
+              <size>0.07 0.3 0.09</size>
+            </box>
+          </geometry>
+        </visual>
+        <visual name='base_footprint_fixed_joint_lump__laser_stand_link_visual_5'>
+          <pose>0 0 0.43 0 -0 0</pose>
+          <geometry>
+            <cylinder>
+              <length>0.12</length>
+              <radius>0.03</radius>
+            </cylinder>
+          </geometry>
+        </visual>
+        <visual name='base_footprint_fixed_joint_lump__laser_link_visual_6'>
+          <pose>0 0 0.51 0 -0 0</pose>
+          <geometry>
+            <cylinder>
+              <length>0.05</length>
+              <radius>0.05</radius>
+            </cylinder>
+          </geometry>
+          <material>
+            <script>
+              <name>Gazebo/white</name>
+              <uri>file://media/materials/scripts/gazebo.material</uri>
+            </script>
+          </material>
+        </visual>
+        <gravity>1</gravity>
+        <sensor name='camera_node' type='camera'>
+          <update_rate>30</update_rate>
+          <camera name='head'>
+            <horizontal_fov>1.39626</horizontal_fov>
+            <image>
+              <width>1280</width>
+              <height>720</height>
+              <format>R8G8B8</format>
+            </image>
+            <clip>
+              <near>0.02</near>
+              <far>300</far>
+            </clip>
+            <noise>
+              <type>gaussian</type>
+              <mean>0</mean>
+              <stddev>0.007</stddev>
+            </noise>
+          </camera>
+          <plugin name='gazebo_camera' filename='libgazebo_ros_camera.so'>
+            <cameraName>usb_camera</cameraName>
+            <imageTopicName>image_raw</imageTopicName>
+            <cameraInfoTopicName>camera_info</cameraInfoTopicName>
+            <frameName>camera_link</frameName>
+            <robotNamespace>/</robotNamespace>
+          </plugin>
+          <pose>-0.3 0 0.39 0 -0 3.14159</pose>
+        </sensor>
+        <sensor name='imu_sensor' type='imu'>
+          <always_on>1</always_on>
+          <update_rate>100</update_rate>
+          <visualize>0</visualize>
+          <plugin name='imu_plugin' filename='libgazebo_ros_imu_sensor.so'>
+            <topicName>/imu/data</topicName>
+            <bodyName>imu_link</bodyName>
+            <updateRateHZ>100.0</updateRateHZ>
+            <gaussianNoise>0.01</gaussianNoise>
+            <xyzOffset>0 0 0</xyzOffset>
+            <rpyOffset>0 0 0</rpyOffset>
+            <frameName>imu_link</frameName>
+            <robotNamespace>/</robotNamespace>
+          </plugin>
+          <pose>0 0 0.42 0 -0 0</pose>
+          <imu/>
+        </sensor>
+        <sensor name='kinect' type='depth'>
+          <always_on>1</always_on>
+          <update_rate>20</update_rate>
+          <camera>
+            <horizontal_fov>1.0472</horizontal_fov>
+            <image>
+              <format>R8G8B8</format>
+              <width>640</width>
+              <height>480</height>
+            </image>
+            <clip>
+              <near>0.05</near>
+              <far>8</far>
+            </clip>
+          </camera>
+          <plugin name='kinect_kinect_controller' filename='libgazebo_ros_openni_kinect.so'>
+            <cameraName>kinect</cameraName>
+            <alwaysOn>1</alwaysOn>
+            <updateRate>10</updateRate>
+            <imageTopicName>rgb/image_raw</imageTopicName>
+            <depthImageTopicName>depth/image_raw</depthImageTopicName>
+            <pointCloudTopicName>depth/points</pointCloudTopicName>
+            <cameraInfoTopicName>rgb/camera_info</cameraInfoTopicName>
+            <depthImageCameraInfoTopicName>depth/camera_info</depthImageCameraInfoTopicName>
+            <frameName>kinect_frame_optical</frameName>
+            <baseline>0.1</baseline>
+            <distortion_k1>0.0</distortion_k1>
+            <robotNamespace>/</robotNamespace>
+          </plugin>
+          <pose>0.3 0 0.41 0 -0 0</pose>
+        </sensor>
+        <sensor name='rplidar' type='gpu_ray'>
+          <visualize>0</visualize>
+          <update_rate>15</update_rate>
+          <ray>
+            <scan>
+              <horizontal>
+                <samples>720</samples>
+                <resolution>1</resolution>
+                <min_angle>-3.14159</min_angle>
+                <max_angle>3.14159</max_angle>
+              </horizontal>
+              <vertical>
+                <samples>1</samples>
+                <min_angle>0</min_angle>
+                <max_angle>0</max_angle>
+              </vertical>
+            </scan>
+            <range>
+              <min>0.1</min>
+              <max>25</max>
+              <resolution>0.01</resolution>
+            </range>
+            <noise>
+              <type>gaussian</type>
+              <mean>0</mean>
+              <stddev>0.01</stddev>
+            </noise>
+          </ray>
+          <plugin name='gazebo_laser' filename='libgazebo_ros_gpu_laser.so'>
+            <topicName>scan</topicName>
+            <frameName>laser_link</frameName>
+            <robotNamespace>/</robotNamespace>
+          </plugin>
+          <pose>0 0 0.51 0 -0 0</pose>
+        </sensor>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+      <joint name='fl_steering_joint' type='revolute'>
+        <pose relative_to='base_footprint'>0.25 0.19 0.23 0 -0 0</pose>
+        <parent>base_footprint</parent>
+        <child>fl_steering_wheel_link</child>
+        <axis>
+          <xyz>0 0 1</xyz>
+          <limit>
+            <lower>-2.1</lower>
+            <upper>2.1</upper>
+            <effort>5</effort>
+            <velocity>6.28</velocity>
+          </limit>
+          <dynamics>
+            <spring_reference>0</spring_reference>
+            <spring_stiffness>0</spring_stiffness>
+          </dynamics>
+        </axis>
+      </joint>
+      <link name='fl_steering_wheel_link'>
+        <pose relative_to='fl_steering_joint'>0 0 0 0 -0 0</pose>
+        <inertial>
+          <pose>-0.001796 -0 0.043642 0 -0 0</pose>
+          <mass>1</mass>
+          <inertia>
+            <ixx>0.0063695</ixx>
+            <ixy>-2.1067e-08</ixy>
+            <ixz>-0.00016867</ixz>
+            <iyy>0.006363</iyy>
+            <iyz>-1.0301e-08</iyz>
+            <izz>0.010458</izz>
+          </inertia>
+        </inertial>
+        <collision name='fl_steering_wheel_link_collision'>
+          <pose>0 0 0 0 -0 0</pose>
+          <geometry>
+            <cylinder>
+              <length>0.001</length>
+              <radius>0.001</radius>
+            </cylinder>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <visual name='fl_steering_wheel_link_visual'>
+          <pose>0 0 0 0 -0 3.14</pose>
+          <geometry>
+            <mesh>
+              <scale>10 10 10</scale>
+              <uri>/home/m7/ranger_ws/src/ugv_gazebo_sim/ranger_mini/ranger_mini_v3/meshes/steering_wheel.dae</uri>
+            </mesh>
+          </geometry>
+        </visual>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+      <joint name='fl_wheel' type='revolute'>
+        <pose relative_to='fl_steering_wheel_link'>0 0 -0.12 0 -0 0</pose>
+        <parent>fl_steering_wheel_link</parent>
+        <child>fl_wheel_link</child>
+        <axis>
+          <xyz>0 1 0</xyz>
+          <limit>
+            <lower>-1e+16</lower>
+            <upper>1e+16</upper>
+          </limit>
+          <dynamics>
+            <spring_reference>0</spring_reference>
+            <spring_stiffness>0</spring_stiffness>
+          </dynamics>
+        </axis>
+      </joint>
+      <link name='fl_wheel_link'>
+        <pose relative_to='fl_wheel'>0 0 0 0 -0 0</pose>
+        <inertial>
+          <pose>0 0 0 0 -0 0</pose>
+          <mass>8</mass>
+          <inertia>
+            <ixx>0.02047</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>0.02047</iyy>
+            <iyz>0</iyz>
+            <izz>0.0324</izz>
+          </inertia>
+        </inertial>
+        <collision name='fl_wheel_link_collision'>
+          <pose>0 0 -0.005 1.57 -0 0</pose>
+          <geometry>
+            <cylinder>
+              <length>0.08</length>
+              <radius>0.09</radius>
+            </cylinder>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <visual name='fl_wheel_link_visual'>
+          <pose>0 0 0 0 -0 0</pose>
+          <geometry>
+            <mesh>
+              <scale>10 10 10</scale>
+              <uri>/home/m7/ranger_ws/src/ugv_gazebo_sim/ranger_mini/ranger_mini_v3/meshes/wheel_v3.dae</uri>
+            </mesh>
+          </geometry>
+        </visual>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+      <joint name='fr_steering_joint' type='revolute'>
+        <pose relative_to='base_footprint'>0.25 -0.19 0.23 0 -0 0</pose>
+        <parent>base_footprint</parent>
+        <child>fr_steering_wheel_link</child>
+        <axis>
+          <xyz>0 0 1</xyz>
+          <limit>
+            <lower>-2.1</lower>
+            <upper>2.1</upper>
+            <effort>5</effort>
+            <velocity>6.28</velocity>
+          </limit>
+          <dynamics>
+            <spring_reference>0</spring_reference>
+            <spring_stiffness>0</spring_stiffness>
+          </dynamics>
+        </axis>
+      </joint>
+      <link name='fr_steering_wheel_link'>
+        <pose relative_to='fr_steering_joint'>0 0 0 0 -0 0</pose>
+        <inertial>
+          <pose>1.8e-05 1e-06 0.043679 0 -0 0</pose>
+          <mass>1</mass>
+          <inertia>
+            <ixx>0.0063625</ixx>
+            <ixy>-1.0581e-07</ixy>
+            <ixz>-4.0831e-07</ixz>
+            <iyy>0.006363</iyy>
+            <iyz>-3.4944e-08</iyz>
+            <izz>0.010465</izz>
+          </inertia>
+        </inertial>
+        <collision name='fr_steering_wheel_link_collision'>
+          <pose>0 0 0 0 -0 0</pose>
+          <geometry>
+            <cylinder>
+              <length>0.001</length>
+              <radius>0.001</radius>
+            </cylinder>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <visual name='fr_steering_wheel_link_visual'>
+          <pose>0 0 0 0 -0 0</pose>
+          <geometry>
+            <mesh>
+              <scale>10 10 10</scale>
+              <uri>/home/m7/ranger_ws/src/ugv_gazebo_sim/ranger_mini/ranger_mini_v3/meshes/steering_wheel.dae</uri>
+            </mesh>
+          </geometry>
+        </visual>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+      <joint name='fr_wheel' type='revolute'>
+        <pose relative_to='fr_steering_wheel_link'>0 0 -0.12 0 -0 0</pose>
+        <parent>fr_steering_wheel_link</parent>
+        <child>fr_wheel_link</child>
+        <axis>
+          <xyz>0 1 0</xyz>
+          <limit>
+            <lower>-1e+16</lower>
+            <upper>1e+16</upper>
+          </limit>
+          <dynamics>
+            <spring_reference>0</spring_reference>
+            <spring_stiffness>0</spring_stiffness>
+          </dynamics>
+        </axis>
+      </joint>
+      <link name='fr_wheel_link'>
+        <pose relative_to='fr_wheel'>0 0 0 0 -0 0</pose>
+        <inertial>
+          <pose>0 0 0 0 -0 0</pose>
+          <mass>8</mass>
+          <inertia>
+            <ixx>0.02047</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>0.02047</iyy>
+            <iyz>0</iyz>
+            <izz>0.0324</izz>
+          </inertia>
+        </inertial>
+        <collision name='fr_wheel_link_collision'>
+          <pose>0 0 -0.005 1.57 -0 0</pose>
+          <geometry>
+            <cylinder>
+              <length>0.08</length>
+              <radius>0.09</radius>
+            </cylinder>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <visual name='fr_wheel_link_visual'>
+          <pose>0 0 0 3.14 -0 0</pose>
+          <geometry>
+            <mesh>
+              <scale>10 10 10</scale>
+              <uri>/home/m7/ranger_ws/src/ugv_gazebo_sim/ranger_mini/ranger_mini_v3/meshes/wheel_v3.dae</uri>
+            </mesh>
+          </geometry>
+        </visual>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+      <joint name='rl_steering_joint' type='revolute'>
+        <pose relative_to='base_footprint'>-0.25 0.19 0.23 0 -0 0</pose>
+        <parent>base_footprint</parent>
+        <child>rl_steering_wheel_link</child>
+        <axis>
+          <xyz>0 0 1</xyz>
+          <limit>
+            <lower>-2.1</lower>
+            <upper>2.1</upper>
+            <effort>5</effort>
+            <velocity>6.28</velocity>
+          </limit>
+          <dynamics>
+            <spring_reference>0</spring_reference>
+            <spring_stiffness>0</spring_stiffness>
+          </dynamics>
+        </axis>
+      </joint>
+      <link name='rl_steering_wheel_link'>
+        <pose relative_to='rl_steering_joint'>0 0 0 0 -0 0</pose>
+        <inertial>
+          <pose>-0.000171 0 0.043678 0 -0 0</pose>
+          <mass>1</mass>
+          <inertia>
+            <ixx>0.0063627</ixx>
+            <ixy>-2.1069e-08</ixy>
+            <ixz>-1.587e-05</ixz>
+            <iyy>0.006363</iyy>
+            <iyz>9.3201e-09</iyz>
+            <izz>0.010465</izz>
+          </inertia>
+        </inertial>
+        <collision name='rl_steering_wheel_link_collision'>
+          <pose>0 0 0 0 -0 0</pose>
+          <geometry>
+            <cylinder>
+              <length>0.001</length>
+              <radius>0.001</radius>
+            </cylinder>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <visual name='rl_steering_wheel_link_visual'>
+          <pose>0 0 0 0 -0 3.14</pose>
+          <geometry>
+            <mesh>
+              <scale>10 10 10</scale>
+              <uri>/home/m7/ranger_ws/src/ugv_gazebo_sim/ranger_mini/ranger_mini_v3/meshes/steering_wheel.dae</uri>
+            </mesh>
+          </geometry>
+        </visual>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+      <joint name='rl_wheel' type='revolute'>
+        <pose relative_to='rl_steering_wheel_link'>0 0 -0.12 0 -0 0</pose>
+        <parent>rl_steering_wheel_link</parent>
+        <child>rl_wheel_link</child>
+        <axis>
+          <xyz>0 1 0</xyz>
+          <limit>
+            <lower>-1e+16</lower>
+            <upper>1e+16</upper>
+          </limit>
+          <dynamics>
+            <spring_reference>0</spring_reference>
+            <spring_stiffness>0</spring_stiffness>
+          </dynamics>
+        </axis>
+      </joint>
+      <link name='rl_wheel_link'>
+        <pose relative_to='rl_wheel'>0 0 0 0 -0 0</pose>
+        <inertial>
+          <pose>0 0 0 0 -0 0</pose>
+          <mass>8</mass>
+          <inertia>
+            <ixx>0.02047</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>0.02047</iyy>
+            <iyz>0</iyz>
+            <izz>0.0324</izz>
+          </inertia>
+        </inertial>
+        <collision name='rl_wheel_link_collision'>
+          <pose>0 0 -0.005 1.57 -0 0</pose>
+          <geometry>
+            <cylinder>
+              <length>0.08</length>
+              <radius>0.09</radius>
+            </cylinder>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <visual name='rl_wheel_link_visual'>
+          <pose>0 0 0 0 -0 0</pose>
+          <geometry>
+            <mesh>
+              <scale>10 10 10</scale>
+              <uri>/home/m7/ranger_ws/src/ugv_gazebo_sim/ranger_mini/ranger_mini_v3/meshes/wheel_v3.dae</uri>
+            </mesh>
+          </geometry>
+        </visual>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+      <joint name='rr_steering_joint' type='revolute'>
+        <pose relative_to='base_footprint'>-0.25 -0.19 0.23 0 -0 0</pose>
+        <parent>base_footprint</parent>
+        <child>rr_steering_wheel_link</child>
+        <axis>
+          <xyz>0 0 1</xyz>
+          <limit>
+            <lower>-2.1</lower>
+            <upper>2.1</upper>
+            <effort>5</effort>
+            <velocity>6.28</velocity>
+          </limit>
+          <dynamics>
+            <spring_reference>0</spring_reference>
+            <spring_stiffness>0</spring_stiffness>
+          </dynamics>
+        </axis>
+      </joint>
+      <link name='rr_steering_wheel_link'>
+        <pose relative_to='rr_steering_joint'>0 0 0 0 -0 0</pose>
+        <inertial>
+          <pose>0 0 0 0 -0 0</pose>
+          <mass>1</mass>
+          <inertia>
+            <ixx>0.01</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>0.01</iyy>
+            <iyz>0</iyz>
+            <izz>0.01</izz>
+          </inertia>
+        </inertial>
+        <collision name='rr_steering_wheel_link_collision'>
+          <pose>0 0 0 0 -0 0</pose>
+          <geometry>
+            <cylinder>
+              <length>0.001</length>
+              <radius>0.001</radius>
+            </cylinder>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <visual name='rr_steering_wheel_link_visual'>
+          <pose>0 0 0 0 -0 0</pose>
+          <geometry>
+            <mesh>
+              <scale>10 10 10</scale>
+              <uri>/home/m7/ranger_ws/src/ugv_gazebo_sim/ranger_mini/ranger_mini_v3/meshes/steering_wheel.dae</uri>
+            </mesh>
+          </geometry>
+        </visual>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+      <joint name='rr_wheel' type='revolute'>
+        <pose relative_to='rr_steering_wheel_link'>0 0 -0.12 0 -0 0</pose>
+        <parent>rr_steering_wheel_link</parent>
+        <child>rr_wheel_link</child>
+        <axis>
+          <xyz>0 1 0</xyz>
+          <limit>
+            <lower>-1e+16</lower>
+            <upper>1e+16</upper>
+          </limit>
+          <dynamics>
+            <spring_reference>0</spring_reference>
+            <spring_stiffness>0</spring_stiffness>
+          </dynamics>
+        </axis>
+      </joint>
+      <link name='rr_wheel_link'>
+        <pose relative_to='rr_wheel'>0 0 0 0 -0 0</pose>
+        <inertial>
+          <pose>0 0 0 0 -0 0</pose>
+          <mass>8</mass>
+          <inertia>
+            <ixx>0.02047</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>0.02047</iyy>
+            <iyz>0</iyz>
+            <izz>0.0324</izz>
+          </inertia>
+        </inertial>
+        <collision name='rr_wheel_link_collision'>
+          <pose>0 0 -0.005 1.57 -0 0</pose>
+          <geometry>
+            <cylinder>
+              <length>0.08</length>
+              <radius>0.09</radius>
+            </cylinder>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <visual name='rr_wheel_link_visual'>
+          <pose>0 0 0 3.14 -0 0</pose>
+          <geometry>
+            <mesh>
+              <scale>10 10 10</scale>
+              <uri>/home/m7/ranger_ws/src/ugv_gazebo_sim/ranger_mini/ranger_mini_v3/meshes/wheel_v3.dae</uri>
+            </mesh>
+          </geometry>
+        </visual>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+      <plugin name='gazebo_ros_control' filename='libgazebo_ros_control.so'>
+        <robotNamespace>/</robotNamespace>
+      </plugin>
+      <frame name='camera_joint' attached_to='base_link'>
+        <pose>-0.3 0 0.09 0 -0 3.14159</pose>
+      </frame>
+      <frame name='camera_link' attached_to='camera_joint'/>
+      <frame name='imu_joint' attached_to='base_link'>
+        <pose>0 0 0.12 0 -0 0</pose>
+      </frame>
+      <frame name='imu_link' attached_to='imu_joint'/>
+      <frame name='kinect_optical_joint' attached_to='kinect_link'>
+        <pose>0 0 0 -1.5708 -0 -1.5708</pose>
+      </frame>
+      <frame name='kinect_frame_optical' attached_to='kinect_optical_joint'/>
+      <frame name='kinect_joint' attached_to='base_link'>
+        <pose>0.3 0 0.11 0 -0 0</pose>
+      </frame>
+      <frame name='kinect_link' attached_to='kinect_joint'/>
+      <frame name='laser_joint' attached_to='laser_stand_link'>
+        <pose>0 0 0.08 0 -0 0</pose>
+      </frame>
+      <frame name='laser_link' attached_to='laser_joint'/>
+      <frame name='laser_stand_joint' attached_to='base_link'>
+        <pose>0 0 0.13 0 -0 0</pose>
+      </frame>
+      <frame name='laser_stand_link' attached_to='laser_stand_joint'/>
+      <frame name='base_footprint_joint' attached_to='base_footprint'>
+        <pose>0 0 0.3 0 -0 0</pose>
+      </frame>
+      <frame name='base_link' attached_to='base_footprint_joint'/>
+      <pose>0 0 0 0 -0 0</pose>
+    </model>
+    <model name='single_corridor'>
+      <pose>1.33127 0.798588 0 0 -0 0</pose>
+      <link name='Wall_4'>
+        <collision name='Wall_4_Collision'>
+          <geometry>
+            <box>
+              <size>5.25 0.15 2.5</size>
+            </box>
+          </geometry>
+          <pose>0 0 1.25 0 -0 0</pose>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <visual name='Wall_4_Visual'>
+          <pose>0 0 1.25 0 -0 0</pose>
+          <geometry>
+            <box>
+              <size>5.25 0.15 2.5</size>
+            </box>
+          </geometry>
+          <material>
+            <script>
+              <uri>file://media/materials/scripts/gazebo.material</uri>
+              <name>Gazebo/Grey</name>
+            </script>
+            <ambient>1 1 1 1</ambient>
+          </material>
+          <meta>
+            <layer>0</layer>
+          </meta>
+        </visual>
+        <pose>-36.9627 4.38119 0 0 -0 -1.5708</pose>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+      <link name='Wall_5'>
+        <collision name='Wall_5_Collision'>
+          <geometry>
+            <box>
+              <size>8.69786 0.15 2.5</size>
+            </box>
+          </geometry>
+          <pose>0 0 1.25 0 -0 0</pose>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <visual name='Wall_5_Visual'>
+          <pose>0 0 1.25 0 -0 0</pose>
+          <geometry>
+            <box>
+              <size>8.69786 0.15 2.5</size>
+            </box>
+          </geometry>
+          <material>
+            <script>
+              <uri>file://media/materials/scripts/gazebo.material</uri>
+              <name>Gazebo/Grey</name>
+            </script>
+            <ambient>1 1 1 1</ambient>
+          </material>
+          <meta>
+            <layer>0</layer>
+          </meta>
+        </visual>
+        <pose>-36.9161 -2.44274 0 0 -0 -1.5708</pose>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+      <link name='Wall_6'>
+        <collision name='Wall_6_Collision'>
+          <geometry>
+            <box>
+              <size>74.0753 0.15 2.5</size>
+            </box>
+          </geometry>
+          <pose>0 0 1.25 0 -0 0</pose>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <visual name='Wall_6_Visual'>
+          <pose>0 0 1.25 0 -0 0</pose>
+          <geometry>
+            <box>
+              <size>74.0753 0.15 2.5</size>
+            </box>
+          </geometry>
+          <material>
+            <script>
+              <uri>file://media/materials/scripts/gazebo.material</uri>
+              <name>Gazebo/Grey</name>
+            </script>
+            <ambient>1 1 1 1</ambient>
+          </material>
+          <meta>
+            <layer>0</layer>
+          </meta>
+        </visual>
+        <pose>0.04638 -6.77715 0 0 -0 -0.002895</pose>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+      <link name='Wall_7'>
+        <collision name='Wall_7_Collision'>
+          <geometry>
+            <box>
+              <size>13.5586 0.15 2.5</size>
+            </box>
+          </geometry>
+          <pose>0 0 1.25 0 -0 0</pose>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <visual name='Wall_7_Visual'>
+          <pose>0 0 1.25 0 -0 0</pose>
+          <geometry>
+            <box>
+              <size>13.5586 0.15 2.5</size>
+            </box>
+          </geometry>
+          <material>
+            <script>
+              <uri>file://media/materials/scripts/gazebo.material</uri>
+              <name>Gazebo/Grey</name>
+            </script>
+            <ambient>1 1 1 1</ambient>
+          </material>
+          <meta>
+            <layer>0</layer>
+          </meta>
+        </visual>
+        <pose>36.9624 -0.226532 0 0 -0 1.57774</pose>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+      <link name='Wall_8'>
+        <collision name='Wall_8_Collision'>
+          <geometry>
+            <box>
+              <size>74.0753 0.15 2.5</size>
+            </box>
+          </geometry>
+          <pose>0 0 1.25 0 -0 0</pose>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <visual name='Wall_8_Visual'>
+          <pose>0 0 1.25 0 -0 0</pose>
+          <geometry>
+            <box>
+              <size>74.0753 0.15 2.5</size>
+            </box>
+          </geometry>
+          <material>
+            <script>
+              <uri>file://media/materials/scripts/gazebo.material</uri>
+              <name>Gazebo/Grey</name>
+            </script>
+            <ambient>1 1 1 1</ambient>
+          </material>
+          <meta>
+            <layer>0</layer>
+          </meta>
+        </visual>
+        <pose>-0.046669 6.53809 0 0 -0 3.1387</pose>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+      <static>1</static>
+    </model>
+    <state world_name='default'>
+      <sim_time>40 33000000</sim_time>
+      <real_time>42 222083374</real_time>
+      <wall_time>1776697666 974990957</wall_time>
+      <iterations>40033</iterations>
+      <model name='ground_plane'>
+        <pose>0 0 0 0 -0 0</pose>
+        <scale>1 1 1</scale>
+        <link name='link'>
+          <pose>0 0 0 0 -0 0</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0 0 0 0 -0 0</acceleration>
+          <wrench>0 0 0 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name='ranger_mini_v3'>
+        <pose>-0.00076 -0.007681 -0.01511 0.000118 -6.7e-05 0.006701</pose>
+        <scale>1 1 1</scale>
+        <link name='base_footprint'>
+          <pose>-0.00076 -0.007681 -0.01511 0.000118 -6.7e-05 0.006701</pose>
+          <velocity>-0.003368 3.2e-05 0.000153 0.000832 0.018247 0.000299</velocity>
+          <acceleration>6.63622 -0.246422 1.11242 1.78069 -0.450678 0.484197</acceleration>
+          <wrench>69.3485 -2.57511 11.6248 0 -0 0</wrench>
+        </link>
+        <link name='fl_steering_wheel_link'>
+          <pose>0.247946 0.183963 0.214929 0.000126 -6.6e-05 0.006706</pose>
+          <velocity>0.000765 -0.000157 -0.004012 0.000391 0.017121 0.01175</velocity>
+          <acceleration>3.2554 -0.101538 -8.29177 -2.68169 -0.446702 2.35071</acceleration>
+          <wrench>3.2554 -0.101538 -8.29177 0 -0 0</wrench>
+        </link>
+        <link name='fl_wheel_link'>
+          <pose>0.247954 0.183978 0.094929 0.000132 0.19363 0.006732</pose>
+          <velocity>-0.001363 -0.000137 -0.004065 -0.000617 -0.001958 0.011794</velocity>
+          <acceleration>-2.62087 -0.032845 -8.46696 0.199726 -0.463523 2.83359</acceleration>
+          <wrench>-20.967 -0.262763 -67.7357 0 -0 0</wrench>
+        </link>
+        <link name='fr_steering_wheel_link'>
+          <pose>0.250492 -0.196028 0.214885 0.000144 -6.8e-05 0.006715</pose>
+          <velocity>0.000892 -0.000143 -0.00494 -0.003076 0.018392 -0.005071</velocity>
+          <acceleration>3.58781 0.276216 -10.2624 -0.815668 -0.04885 2.78687</acceleration>
+          <wrench>3.58781 0.276216 -10.2624 0 -0 0</wrench>
+        </link>
+        <link name='fr_wheel_link'>
+          <pose>0.2505 -0.196015 0.094885 0.000153 0.232754 0.006749</pose>
+          <velocity>-0.001331 0.000225 -0.004886 -0.004456 -0.010316 -0.004804</velocity>
+          <acceleration>-2.60278 0.728379 -10.1486 -1.56489 -0.818088 -0.171253</acceleration>
+          <wrench>-20.8222 5.82703 -81.189 0 -0 0</wrench>
+        </link>
+        <link name='rl_steering_wheel_link'>
+          <pose>-0.252043 0.180613 0.214895 0.000137 -6.8e-05 0.006716</pose>
+          <velocity>0.000769 -0.000281 0.004591 0.000975 0.017368 0.000663</velocity>
+          <acceleration>3.29028 -0.316977 9.20885 -1.45497 -0.947144 2.12917</acceleration>
+          <wrench>3.29028 -0.316977 9.20885 0 -0 0</wrench>
+        </link>
+        <link name='rl_wheel_link'>
+          <pose>-0.252035 0.180628 0.094895 0.000147 -0.22851 0.006683</pose>
+          <velocity>-0.001364 -0.000276 0.004641 0.002832 -0.014695 0.000795</velocity>
+          <acceleration>-2.61477 -0.251388 9.30238 -1.35905 -0.009017 2.02333</acceleration>
+          <wrench>-20.9181 -2.0111 74.4191 0 -0 0</wrench>
+        </link>
+        <link name='rr_steering_wheel_link'>
+          <pose>-0.249496 -0.199379 0.214851 0.000116 -6.6e-05 0.006707</pose>
+          <velocity>0.00089 -0.000233 0.004585 0.000196 0.018386 0.00336</velocity>
+          <acceleration>1.94053 -0.14316 9.205 0.398828 -0.173701 -1.98935</acceleration>
+          <wrench>1.94053 -0.14316 9.205 0 -0 0</wrench>
+        </link>
+        <link name='rr_wheel_link'>
+          <pose>-0.249489 -0.199365 0.094852 0.000134 -0.264547 0.006673</pose>
+          <velocity>-0.001412 -0.000243 0.004868 0.0025 -0.016375 0.003522</velocity>
+          <acceleration>-2.74542 -0.179624 9.76153 1.01321 0.791974 1.81109</acceleration>
+          <wrench>-21.9633 -1.43699 78.0922 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name='single_corridor'>
+        <pose>1.33127 0.798588 0 0 -0 0</pose>
+        <scale>1 1 1</scale>
+        <link name='Wall_4'>
+          <pose>-35.6314 5.17978 0 0 0 -1.5708</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0 0 0 0 -0 0</acceleration>
+          <wrench>0 0 0 0 -0 0</wrench>
+        </link>
+        <link name='Wall_5'>
+          <pose>-35.5848 -1.64415 0 0 0 -1.5708</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0 0 0 0 -0 0</acceleration>
+          <wrench>0 0 0 0 -0 0</wrench>
+        </link>
+        <link name='Wall_6'>
+          <pose>1.37765 -5.97856 0 0 0 -0.002895</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0 0 0 0 -0 0</acceleration>
+          <wrench>0 0 0 0 -0 0</wrench>
+        </link>
+        <link name='Wall_7'>
+          <pose>38.2937 0.572056 0 0 -0 1.57774</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0 0 0 0 -0 0</acceleration>
+          <wrench>0 0 0 0 -0 0</wrench>
+        </link>
+        <link name='Wall_8'>
+          <pose>1.2846 7.33668 0 0 -0 3.1387</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0 0 0 0 -0 0</acceleration>
+          <wrench>0 0 0 0 -0 0</wrench>
+        </link>
+      </model>
+      <light name='sun'>
+        <pose>0 0 10 0 -0 0</pose>
+      </light>
+    </state>
+    <gui fullscreen='0'>
+      <camera name='user_camera'>
+        <pose>2.19197 -36.4868 39.7714 -0 0.807641 1.7082</pose>
+        <view_controller>orbit</view_controller>
+        <projection_type>perspective</projection_type>
+      </camera>
+    </gui>
+
+    <!--
+      本 actor 建议由脚本自动生成（只改速度即可自动计算时间点）：
+      scripts/update_single_corridor_actor.py
+      示例：
+      python3 scripts/update_single_corridor_actor.py --speed 0.8
+    -->
+    <!-- AUTO_ACTOR_BEGIN -->
+    <actor name="walking_dynamic_obstacle_single_corridor">
+      <pose>12 0 0 0 0 0</pose>
+      <skin>
+        <filename>walk.dae</filename>
+        <scale>1.0</scale>
+      </skin>
+      <animation name="walking">
+        <filename>walk.dae</filename>
+        <scale>1.0</scale>
+        <interpolate_x>true</interpolate_x>
+      </animation>
+      <link name="actor_link">
+        <pose>0 0 1.0 0 0 0</pose>
+        <collision name="Box_Collision">
+          <geometry>
+            <cylinder>
+              <radius>0.3</radius>
+              <length>1.8</length>
+            </cylinder>
+          </geometry>
+        </collision>
+      </link>
+      <script>
+        <loop>true</loop>
+        <delay_start>0.0</delay_start>
+        <auto_start>true</auto_start>
+        <trajectory id="0" type="walking">
+          <waypoint>
+            <time>0</time>
+            <pose>12 0 0 0 0 3.14159</pose>
+          </waypoint>
+          <waypoint>
+            <time>22</time>
+            <pose>-10 0 0 0 0 3.14159</pose>
+          </waypoint>
+          <waypoint>
+            <time>22.5</time>
+            <pose>-10 0 0 0 0 0</pose>
+          </waypoint>
+          <waypoint>
+            <time>44.5</time>
+            <pose>12 0 0 0 0 0</pose>
+          </waypoint>
+          <waypoint>
+            <time>45</time>
+            <pose>12 0 0 0 0 3.14159</pose>
+          </waypoint>
+        </trajectory>
+      </script>
+      <plugin name="actor_collisions_plugin" filename="libActorCollisionsPlugin.so">
+        <scaling collision="Box_Collision">
+          <x>1.0</x>
+          <y>1.0</y>
+          <z>1.0</z>
+        </scaling>
+      </plugin>
+    </actor>
+    <!-- AUTO_ACTOR_END -->
+  </world>
+</sdf>

@@ -378,6 +378,9 @@
   <xacro:property name="laser_joint_x" value="0.0" />
   <xacro:property name="laser_joint_y" value="0.0" />
   <xacro:property name="laser_joint_z" value="0.08" />
+  <xacro:property name="imu_joint_x" value="0.0" />
+  <xacro:property name="imu_joint_y" value="0.0" />
+  <xacro:property name="imu_joint_z" value="0.12" />
   <!-- 传感器集成 -->
   <xacro:include filename="$(find ranger_mini_v3)/urdf/sensor/camera.xacro" />
   <xacro:usb_camera joint_x="${camera_joint_x}" joint_y="${camera_joint_y}" joint_z="${camera_joint_z}"/>
@@ -387,6 +390,9 @@
 
   <xacro:include filename="$(find ranger_mini_v3)/urdf/sensor/laser.xacro" />
   <xacro:laser joint_x="${laser_joint_x}" joint_y="${laser_joint_y}" joint_z="${laser_joint_z}" parent_link="laser_stand_link"/>
+
+  <xacro:include filename="$(find ranger_mini_v3)/urdf/sensor/imu.xacro" />
+  <xacro:imu joint_x="${imu_joint_x}" joint_y="${imu_joint_y}" joint_z="${imu_joint_z}" parent_link="base_link"/>
 
   <transmission name="fl_steering_wheel_trans">
     <type>transmission_interface/SimpleTransmission</type>
